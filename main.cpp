@@ -1,4 +1,6 @@
-
+// todo: look for the next todo that is where the path is 
+// you need to get https://github.com/TheThinMatrix/OpenGL-Animation/tree/master/Resources
+// "You must specify your own path for where you would like your resources to be."
 #define vOUR_OUBY_DOBY_FREIND2
 #ifdef vOUR_OUBY_DOBY_FREIND2
 
@@ -756,10 +758,10 @@ int main() {
     std::cerr << "Error: No windowing system defined (DO_GLFW3)." << std::endl;
     return -1;
 #endif
-
+    // todo: "You must specify your own path for where you would like your resources to be."
     // 2. Model and Texture Paths
-    const std::string modelPath = "F:/Users/DavidJBowen/source/repos2/repos2/repos3/OGLSYSTEMPOD - Copy/res/models/man/model.dae";
-    const std::string texturePath = "F:/Users/DavidJBowen/source/repos2/repos2/repos3/OGLSYSTEMPOD - Copy/res/models/man/diffuse.png";
+    const std::string modelPath = "F:/res/models/man/model.dae";
+    const std::string texturePath = "F:/res/models/man/diffuse.png";
 
     // 3. Load Model and Animation
     const aiScene* scene = importer.ReadFile(modelPath.c_str(),

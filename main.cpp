@@ -5,7 +5,10 @@
 // [Coding Man (Itan)] on YouTube.
 // It has been modified in some parts to use GLFW3 instead of SDL.
 // His original code didn't seem to work, but the underlying premise remains the same.
-
+//    ThinMatrix creates tutorials using Java, including an OpenGL Animation Tutorial and other fascinating content.
+// Alongside other resources like Ogldev on YouTube, it is truly inspiring.
+//There are more advanced tutorials available online, such as Learn OpenGL.
+// https://learnopengl.com/Getting-started/OpenGL
 
 
 // No #pragma comment(lib, ...) directives here; these are for build system.

@@ -1,8 +1,12 @@
 // todo: look for the next todo that is where the path is 
 // you need to get https://github.com/TheThinMatrix/OpenGL-Animation/tree/master/Resources
 // "You must specify your own path for where you would like your resources to be."
-#define vOUR_OUBY_DOBY_FREIND2
-#ifdef vOUR_OUBY_DOBY_FREIND2
+// Note: This code originated from [OpenGL skeletal animation in C++ using Assimp]
+// [Coding Man (Itan)] on YouTube.
+// It has been modified in some parts to use GLFW3 instead of SDL.
+// His original code didn't seem to work, but the underlying premise remains the same.
+
+
 
 // No #pragma comment(lib, ...) directives here; these are for build system.
 
@@ -184,7 +188,50 @@ GLFWwindow* glfwInitWindow(int& windowWidth, int& windowHeight) {
 #endif // DO_GLFW3
 
 // --- Shader Source Code ---
+// This Shader was modified base from ...
+//https://lisyarus.github.io/blog/posts/gltf-animation.html
 
+// --- Shader Source Code ---
+const char* vertexShaderSource = R"(
+#version 440 core
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 normal;
+layout (location = 2) in vec2 uv;
+layout (location = 3) in vec4 boneIds;      // IDs of bones influencing this vertex
+layout (location = 4) in vec4 boneWeights;  // Weights corresponding to boneIds
+
+out vec2 tex_cord;
+out vec3 v_normal;
+out vec3 v_pos;
+
+uniform mat4 bone_transforms[50]; // Array of bone transformation matrices
+uniform mat4 view_projection_matrix;
+uniform mat4 model_matrix;
+
+vec4 applyBoneTransform(vec4 p) {
+    vec4 result = vec4(0.0);
+    for (int i = 0; i < 4; ++i) {
+        result += boneWeights[i] * (bone_transforms[int(boneIds[i])] * p);
+    }
+    return result;
+}
+
+void main() {
+    vec4 animatedPos = applyBoneTransform(vec4(position, 1.0));
+    vec3 animatedNormal = normalize(mat3(transpose(inverse(mat3(model_matrix * bone_transforms[int(boneIds.x)])))) * normal);
+
+    // Final vertex position in clip space
+    gl_Position = view_projection_matrix * model_matrix * animatedPos;
+
+    // Pass transformed position to fragment shader
+    v_pos = vec3(model_matrix * animatedPos);
+    tex_cord = uv;
+    v_normal = animatedNormal;
+}
+)";
+
+/*
+// This shader works also
 // Vertex shader source string (raw string literal for multiline string)
 const char* vertexShaderSource = R"(
 #version 440 core
@@ -232,6 +279,7 @@ void main()
     v_normal = normalize(v_normal); // Ensure normal is normalized
 }
 )";
+*/
 
 // Fragment shader source string
 //const char* fragmentShaderSource = R"(
@@ -897,7 +945,6 @@ int main() {
     return 0;
 }
 
-#endif // vOUR_OUBY_DOBY_FREIND2
 
 
 

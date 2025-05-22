@@ -9,6 +9,7 @@
 // Alongside other resources like Ogldev on YouTube, it is truly inspiring.
 //There are more advanced tutorials available online, such as Learn OpenGL.
 // https://learnopengl.com/Getting-started/OpenGL
+// The youtube channel Thin uses is [Sebastian Lague] HE SHOWS HOW YOU CAN USE BLENDER TO BUILD SAID CHARACTER.
 
 // ----------------------------------------------------------------------
 // This version supports arbitrary bone influences per vertex using
